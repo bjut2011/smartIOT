@@ -51,7 +51,12 @@ class DevicesController < ApplicationController
 
   def layout
   end
-
+  
+  def statistics
+    current_admin ||=  User.find_by_token(cookies[:token]) if cookies[:token]
+    @project_id=current_admin.id
+    @devices = Device.all
+  end
   def history
 
    @sensorId=params[:sensorId]
@@ -190,6 +195,10 @@ class DevicesController < ApplicationController
    if params[:status]
      @status=params[:status]
    end
+   @device_id=""
+   if params[:device_id]
+      @device_id=params[:device_id]
+   end
   end
   
   def modify
@@ -199,11 +208,17 @@ class DevicesController < ApplicationController
     @device = Device.new
     @project_id=params[:pid]
     @current_admin ||=  User.find_by_token(cookies[:token]) if cookies[:token]
-    if current_admin.nil?
+    if @current_admin.nil?
         redirect_to root_url, :notice => "已经退出登录"
     end
   end
 
+  def dashboard
+    @devices = Device.all
+    @count=@devices.size
+    @online=Device.where(:update_time.gt => (Time.now.to_i-300)).count
+    @offline=@count-@online
+  end
   # GET /devices/1/edit
   def edit
   end

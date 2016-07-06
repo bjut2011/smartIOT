@@ -36,7 +36,9 @@ class UsersController < ApplicationController
 
   def delbinding
      @ud=Userdevice.where(device_id:params[:device_id],user_id:params[:user_id]).first
-     @ud.destroy
+     if @ud
+      @ud.destroy
+     end
      respond_to do |format|
          format.json {render :json => {:code =>0}}
      end
@@ -132,7 +134,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         @user.update_attributes!(token: SecureRandom.urlsafe_base64)
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to "/users?pid="+current_admin.id, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

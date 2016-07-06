@@ -354,6 +354,10 @@ function demoLogin(){
    						showDate();
    					}
    				});
+            var device_id="<%=@device_id%>";
+            if(device_id!=""){
+              divShow(device_id);
+            }
             
             var count = 180; 
             var btn="";
@@ -610,8 +614,8 @@ function demoLogin(){
 				        </div>
 				        <div class="in_infosN">
 				            <h4><a onclick="divShow('<%=de.id%>')"  title="<%=de.device_name%>">
-                                             <%if de.device_name.length>5%>
-                                             <%=de.device_name[0,5]%>...
+                                             <%if de.device_name.length>9%>
+                                             <%=de.device_name[0,9]%>...
                                              <%else%>
                                              <%=de.device_name%>
                                              <%end%>

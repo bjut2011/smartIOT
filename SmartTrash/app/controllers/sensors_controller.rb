@@ -42,6 +42,15 @@ class SensorsController < ApplicationController
     #end
   end
 
+  def getSensor
+    @device = Device.find(params[:id])
+    @sensor=Sensor.where(:device_id => @device.id,:display => 1)
+    respond_to do |format|
+      format.json {render :json => {:code =>0,:sensor => @sensor,:device => @device}}
+    end
+  end
+
+
   def querySensorDataDetail
     sensorId=params[:sensorId]
     startTime=params[:startTime]

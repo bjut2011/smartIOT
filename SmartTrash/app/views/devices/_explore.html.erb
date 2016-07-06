@@ -19,6 +19,7 @@
         center: [116.397428, 39.90923]
         
     });
+   var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
    var markerArr = new Array();
    $.ajax({
    					type:"post",
@@ -28,6 +29,7 @@
    						if(flag == 0){//有数据
    							var dataObj=data.data; 
    							var htm = '';
+                                                        
    							for(var i=0;i<dataObj.length;i++){
    								markerArr[i] = dataObj[i];
                                                                 var position=[];
@@ -46,10 +48,65 @@
                                                                  offset: new AMap.Pixel(20, 20),//修改label相对于maker的位置
                                                                  content: dataObj[i].device_name
                                                                 });
+                                                                  
+
+
+                                                                var info = [];
+                                                                info.push("<div><div><img style=\"float:left;\" src=\" http://webapi.amap.com/images/autonavi.png \"/></div> ");
+                                                                info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>高德软件</b>");
+                                                                info.push("电话 : 010-84107000   邮编 : 100102");
+                                                                info.push("地址 :北京市朝阳区望京阜荣街10号首开广场4层</div></div>");
+
+                                                                //marker.content = info.join("<br/>");
+                                                                marker.content = dataObj[i].id;
+                                                                marker.on('click', markerClick);
+                                                                //marker.emit('click', {target: marker});
+
+
+                                                                
 							}
    						}else{
    						}
    					}
    				});
+    function markerClick(e) {
+        //infoWindow.setContent(e.target.content);
+        //infoWindow.open(map, e.target.getPosition());
+        $.ajax({
+   		type:"post",
+  		url:"/getSensor?id="+e.target.content,
+   		success:function(data){
+                     var sfull="";
+                     var opennum="0";
+                     var compressNum=0;
+                     for(var i=0;i<data.sensor.length;i++){
+                        se=data.sensor[i];
+                        if (se.name==("垃圾是否满")){
+                            sfull=se.tag;
+                        }
+                        if (se.name==("今天开门次数累计")){
+                            opennum=se.value;
+                        }
+                        if (se.name==("今天70%启动压缩次数")){
+                            compressNum+=parseInt(se.value);
+                        }
+                        if (se.name==("今天90%启动压缩次数")){
+                            compressNum+=parseInt(se.value);
+                        }
+                     }
+                     var info = [];
+                     info.push("<div><div style=\"padding:0px 0px 0px 0px;\"><b>"+data.device.device_name+"</b></div>");
+                     info.push("<div style=\"padding:0px 0px 0px 0px;line-height:18px;\">设备编号: "+data.device.device_sn+"");
+                     info.push("垃圾桶状态: "+sfull);
+                     info.push("今天开门次数: "+parseInt(opennum));
+                     info.push("今天压缩次数: "+compressNum);
+                     info.push("<a href='/devices/monitor?pid=<%=@project_id%>&device_id="+data.device.id+"'><font color='#3385ff'>详细信息</font></a>");
+                     info.push("</div></div>");
+                     infoWindow.setContent(info.join("<br/>"));
+                     infoWindow.open(map, e.target.getPosition());
+                     //alert("OK");
+                }
+        });
+   }
 
 </script>

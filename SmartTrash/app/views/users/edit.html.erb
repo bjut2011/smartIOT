@@ -332,6 +332,24 @@ function demoLogin(){
 <!--  登录 注册 结束-->
 
  <script type="text/javascript">
+        Date.prototype.Format = function(fmt)   
+        { //author: meizz   
+         var o = {   
+         "M+" : this.getMonth()+1,                 //月份   
+         "d+" : this.getDate(),                    //日   
+         "h+" : this.getHours(),                   //小时   
+         "m+" : this.getMinutes(),                 //分   
+         "s+" : this.getSeconds(),                 //秒   
+         "q+" : Math.floor((this.getMonth()+3)/3), //季度   
+         "S"  : this.getMilliseconds()             //毫秒   
+         };   
+         if(/(y+)/.test(fmt))   
+         fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));   
+         for(var k in o)   
+           if(new RegExp("("+ k +")").test(fmt))   
+              fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+         return fmt;   
+        }  
         $(document).ready(function () {
            //getCurrentDate();
             $("#modal-toggle1").click(function () {
@@ -340,6 +358,15 @@ function demoLogin(){
             $("#modal-toggle2").click(function () {
                 $(".modal-content").toggle();
             })
+            var time1 = new Date().Format("yyyy-MM-dd hh:mm:ss");  
+            var rq = new Date().Format("yyyy-MM-dd");  
+            $("#rq").val(rq);
+        
+            $("#nowDate").html(time1);
+            var myDate = new Date();
+            $("#h").val(myDate.getHours());
+            $("#m").val(myDate.getMinutes());
+   	    $("#s").val(myDate.getSeconds());
             
             
             $.ajax({

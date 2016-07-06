@@ -1,0 +1,120 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script src="/js/map/language01-zh-cn.js?v=20140219" type="text/javascript"></script>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+
+</title><link rel="stylesheet" href="/css/map/all.css" type="text/css" /><link rel="stylesheet" type="text/css" href="/css/map/form.css" /><link rel="stylesheet" type="text/css" href="/css/map/global.css" /> 	
+    <script src="/js/map/jquery-1.6.min.js" type="text/javascript"></script>
+    <script src="/js/map/ProductUpdate.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/map/WdatePicker.js"></script>
+</head>
+<style type="text/css"> 
+form ,body{margin:1px;padding:1px;font-size:13px;}
+#find_phone_form {display:none;padding:10px 0 0 15px;}
+#find_phone{display:none;}
+#info_tip .advice{color:Red;padding:2px;font-size:13px;font-weight:bold;}
+.legend{font-size:14px;}
+fieldset {padding:5px;border:1px solid #eeeeee;background:#fff;}
+.input_{font-size:12px;border:0; color:black;background-color:#FFFFFF; padding:0px;margin:2px 0; height:18px;background:#F6F6F6}
+.hover_more {border-bottom: 1px dotted #ffa500;color: #014CCC;cursor: help;display: inline-block;line-height: 16px;}
+ 
+.hover_tips {color: #333333;position: absolute;z-index: 2;}
+.hover_tips .hover_tips_zt, .hover_tips .hover_tips_ztb {background: url("images/tips_icon.png") no-repeat scroll 0 0 transparent;height: 7px;left: 10px;position: absolute;top: -6px;width: 11px;}
+.hover_tips .hover_tips_zt {background-position: 0 0;top: -6px;left: auto;right: 15px;bottom: auto;}
+.hover_tips .hover_tips_ztb {background-position: -21px 0;bottom: -6px;_bottom: -14px;left: auto;right: 15px;top: auto;}
+.hover_tips .hover_tips_cont {background-color: #FFF9CC;border: 1px solid #F4CB48;font-size: 13px;padding: 4px;text-align: left;}
+</style>
+
+<body>
+    <form method="post" action="./ProductUpdate.aspx?deviceid=52816&amp;randon=44707" id="form1">
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="device_id" id="device_id" value="<%=@dev_id%>" />
+</div>
+    <div>
+ <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="20%" height="22" class="title">
+                            <script type="text/javascript">
+                                writePage(allPage.deviceNo);
+                            </script>:</td>
+        <td width="25%" class="info"><input name="txtSerialNumber" type="text" id="txtSerialNumber" class="input_" readonly="readonly" allow="false" value="6430071066" /></td>
+        <td width="21%" class="title" align="right">
+                            <script type="text/javascript">
+                                writePage(allPage.deliveryTime);
+                            </script>:</td>
+        <td width="34%" class="info"><input name="txtCreated" type="text" id="txtCreated" class="input_" readonly="readonly" allow="false" value="2016-05-05" /></td>
+      </tr>
+      <tr>
+        <td height="22" class="title">
+                            <script type="text/javascript">
+                                writePage(allPage.modelName);
+                            </script>:</td>
+        <td class="info"><input name="txtModelName" type="text" id="txtModelName" class="input_" readonly="readonly" allow="false" value="V30" /></td>
+        <td class="title" align="right">
+                            <script type="text/javascript">
+                                writePage(allPage.hireExpireTime);
+                            </script>:</td>
+        <td class="info"><input name="txtHireExpireDate" type="text" id="txtHireExpireDate" class="input_" disabled="disabled" allow="false" style="color:black" value="2026-05-03" /></td>
+      </tr>
+      <tr>
+       <td height="22" class="title"></td>
+       <td class="info"></td>
+      </tr>
+      <tr>
+        <td height="22" class="title">
+                            <script type="text/javascript">
+                                writePage(dealerPage.name3);
+                            </script>:</td>
+        <td class="info"><input name="txtDeviceName" type="text" id="txtDeviceName" class="input" maxlength="20" value="<%=@dev.name%>" /></td>
+        <td height="22" align="right" class="title"><script type="text/javascript">
+                                          writePage(productUpdatePage.filterLBS);
+                            </script>:</td>
+        <td class="info" align="left"><input id="chkLBS" type="checkbox" name="chkLBS" /></td>
+      </tr>
+      <tr>
+        <td width="20%" height="22" class="title">
+                            <script type="text/javascript">
+                                writePage(allPage.simNo);
+                            </script>:</td>
+        <td width="25%" class="info"><input name="txtPhoneNum" type="text" id="txtPhoneNum" maxlength="15" class="input" value="******" /></td>
+    </tr>
+      <tr>
+        <td height="22" class="title"><script type="text/javascript">
+                                                                      writePage(allPage.cellName);
+                            </script>:</td>
+        <td class="info"><input name="txtCarUserName" type="text" id="txtCarUserName" class="input" maxlength="20" value="******" /></td>
+        <td align="right" class="title">
+                            <script type="text/javascript">
+                                writePage(allPage.cellPhone);
+                            </script>:</td>
+        <td class="info"><input name="txtCellPhone" type="text" id="txtCellPhone" class="input" maxlength="20" value="<%=@dev.mobile%>" /></td>
+    </tr>
+
+      <tr>
+        <td class="title">
+                             <script type="text/javascript">
+                                 writePage(allPage.remark);
+                            </script>:</td>
+        <td colspan="2"><textarea name="txtDescription" id="txtDescription" class="textarea" maxlength="200" rows="3" cols="35"></textarea></td>
+        <td valign="top" class="info">&nbsp;</td>
+      </tr>
+			  <tr style="height:50px;">
+				<td align="right"></td>
+				<td><input type="button" name="btnSave" value="保存" onclick="checkSubmit()"  id="btnSave" style="background-color:#1f8ccc;cursor:pointer; font-weight:bold; width:60px; height:23px; border:0px; color:White;" />
+             &nbsp;&nbsp;<a href="javascript:void(0);" style="color:Black;" onclick="closePage();"><script type="text/javascript">
+                                                                                                 writePage(allPage.cancel);
+                            </script></a>                   
+                   </td>
+			  </tr>
+  </table>
+
+    </div>
+    <input name="hidIcon" type="hidden" id="hidIcon" value="30" />
+    </form>
+</body>
+</html>
+
